@@ -4,11 +4,11 @@
 	xsi:schemaLocation="http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
 	<!-- Root Context: defines shared resources visible to all other web components -->
 	
-	<bean id="tv" class="com.yedam.app.java.SamsungTV" />
+	<!--  <bean id="tv" class="com.yedam.app.java.SamsungTV" />
 	
 	<bean id="classRoom" class="">
-		<property name = "inTV" ref="tv"/> <!-- setter방식 -->
-	</bean>	
+		<property name = "inTV" ref="tv"/> setter방식
+	</bean>	-->
 	
 	
 </beans>
