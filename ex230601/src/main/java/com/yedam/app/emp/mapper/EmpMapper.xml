@@ -20,16 +20,44 @@
 
 	<insert id="insertMember"
 		parameterType="com.yedam.app.emp.service.EmpVO">
+		<selectKey keyProperty="employeeId" resultType="string" order="BEFORE">
+			<!--  employees_seq.nextval -->
+			select max(employee_id)+1 
+			from employees
+		</selectKey>
 		insert into
-		employees(EMPLOYEE_ID,first_name,LAST_NAME,EMAIL,HIRE_DATE,JOB_ID)
-		values(employees_seq.nextval,#{firstName},#{lastName},#{email},sysdate,#{jobId})
+		employees(EMPLOYEE_ID,first_name,LAST_NAME,EMAIL,HIRE_DATE,JOB_ID,department_id)
+		values(#{employeeId},#{firstName},#{lastName},
+									 #{email},sysdate,#{jobId},#{departmentId})
 	</insert>
+
+	<update id="updateEmp">
+		UPDATE employees
+		   SET FIRST_NAME = #{firstName},
+			   LAST_NAME = #{lastName},
+			   EMAIL = #{email},
+			   hire_date = #{hireDate},
+			   job_id = #{jobId},
+			   department_id = #{departmentId}
+		WHERE  EMPLOYEE_ID = #{employeeId}	   		   
+	</update>
+	
+	
+	<delete id="deleteEmp">
+		DELETE FROM employees
+		WHERE employee_id = #{employeeId}
+	</delete>
+
 
 	<select id="selectOne" parameterType="int" resultType="EmpVO">
 		select
 		employee_id,
 		first_name,
-		last_name
+		last_name,
+		email,
+		to_char(hire_date,'yyyy-mm-dd') hire_date,
+		job_id,
+		department_id
 		from employees
 		where employee_id = #{empNo}
 	</select>
@@ -44,7 +72,8 @@
 		first_name,
 		last_name,
 		email,
-		department_id
+		department_id,
+		to_char(hire_date,'yyyy-mm-dd') hire_date
 		from employees
 		<include refid="empWhere"></include>
 		<choose>
@@ -56,5 +85,22 @@
 			</otherwise>
 		</choose>
 	</select>
+
+	<select id="selectJobs" resultType="map">
+		SELECT JOB_ID "jobId", <!-- 키값 받아오는건 value -->
+			   JOB_TITLE "jobTitle"
+		FROM JOBS
+		ORDER BY JOB_TITLE
+	</select>
+	
+	<select id="selectDept" resultType="map">
+		select department_id "departmentId",
+			   department_name "departmentName"
+		from departments
+		order by department_id
+	</select>
+
+	
+
 
 </mapper>

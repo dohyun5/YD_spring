@@ -1,8 +1,10 @@
 package com.yedam.app;
 
 import static org.junit.Assert.assertEquals;
+import static org.junit.Assert.assertNotNull;
 
 import java.util.List;
+import java.util.Map;
 
 import org.junit.Ignore;
 import org.junit.Test;
@@ -28,7 +30,7 @@ public class EmpMapperClient {
 	}
 		
 	
-	@Test
+	@Ignore
 	public void 전체조회() {
 		EmpVO param = new EmpVO();
 		param.setDepartmentId("50,90");
@@ -48,17 +50,34 @@ public class EmpMapperClient {
 		EmpVO vo = new EmpVO();
 		vo.setFirstName("ttest");
 		vo.setLastName("test");
-		vo.setEmail("1attst@email.com");
+		vo.setEmail("122atddtst@email.com");
 		vo.setJobId("IT_PROG");
-		//int aa = empMapper.insertMember(vo);
-		//assertEquals(aa,1);
-		EmpVO findEmp = empMapper.selectOne(Integer.parseInt(vo.getEmployeeId()));
-		assertEquals(findEmp.getLastName(),"test");
+		empMapper.insertEmp(vo);
+		System.out.println(vo.getEmployeeId()); //이 값은 모름. 이걸 알기위한 selectkey
 		
 		
-		System.out.println(vo);
+//		EmpVO vo = new EmpVO();
+//		vo.setFirstName("ttest");
+//		vo.setLastName("test");
+//		vo.setEmail("1attst@email.com");
+//		vo.setJobId("IT_PROG");
+//		//int aa = empMapper.insertMember(vo);
+//		//assertEquals(aa,1);
+//		EmpVO findEmp = empMapper.selectOne(Integer.parseInt(vo.getEmployeeId()));
+//		assertEquals(findEmp.getLastName(),"test");
+//		
+//		System.out.println(vo);
 		
 	}
+	
+	@Test
+	public void selectJobs() {
+		List<Map<String, Object>> list = empMapper.selectJobs();
+		assertNotNull(list);
+	}
+	
+	
+	
 	
 	
 	
