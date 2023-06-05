@@ -73,16 +73,16 @@ public class DeptInfoController {
 	
 	//수정 - 기능 : POST방식
 	//@RequestBody : JSON포맷을 사용하는 경우 -> content-type : 'application/json'
-	//@PostMapping("deptUpdate")
-	@ResponseBody
-	public Map<String, Object> deptUpdate(@RequestBody List<DeptInfoVO> deptVO) {
-		return deptService.updateDeptList(deptVO);
-	}
-//	public String deptUpdate(@RequestBody List<DeptInfoVO> deptVO, RedirectAttributes rtt) {
-//		Map<String, Object> map = deptService.updateDeptList(deptVO);
-//		rtt.addFlashAttribute("updateRes", map);
-//		return "redirect:deptInfo?departmentId="+deptVO.get(0).getDepartmentId();
+	@PostMapping("deptUpdate")
+//	@ResponseBody
+//	public Map<String, Object> deptUpdate(@RequestBody List<DeptInfoVO> deptVO) {
+//		return deptService.updateDeptList(deptVO);
 //	}
+	public String deptUpdate(@RequestBody List<DeptInfoVO> deptVO, RedirectAttributes rtt) {
+		Map<String, Object> map = deptService.updateDeptList(deptVO);
+		rtt.addFlashAttribute("updateRes", map);
+		return "redirect:deptInfo?departmentId="+deptVO.get(0).getDepartmentId();
+	}
 	//삭제 - 기능 : POST방식
 	@PostMapping("deptDelete")
 	public String deptDelete(DeptListVO list) {
