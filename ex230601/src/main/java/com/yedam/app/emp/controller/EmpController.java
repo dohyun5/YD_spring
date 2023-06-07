@@ -36,7 +36,7 @@ public class EmpController {
 //		new EmpVO();
 //		vo.setDepartmentId(request.getParameter("dee"));
 		System.out.println(vo);
-		//model.addAttribute("emp", vo);
+		//model.addAttribute("emp", vo); //보낸 데이터를 유지해야 할때 많이 사용.
 		model.addAttribute("empList", empMapper.selectList(vo));
 		return "emp/empList";
 	}

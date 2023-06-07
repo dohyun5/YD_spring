@@ -2,33 +2,50 @@
 <beans xmlns="http://www.springframework.org/schema/beans"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:mybatis-spring="http://mybatis.org/schema/mybatis-spring"
+	xmlns:tx="http://www.springframework.org/schema/tx"
 	xsi:schemaLocation="http://mybatis.org/schema/mybatis-spring http://mybatis.org/schema/mybatis-spring-1.2.xsd
-		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd">
+		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/tx http://www.springframework.org/schema/tx/spring-tx-4.3.xsd">
 
 	<!-- Root Context: defines shared resources visible to all other web components -->
 
 	<!-- datasource connection pool -->
 	<!-- 라이브러리에 추가를하면 bean에도 추가를 해줘야 사용이 가능함. 하지만 spring boot는 자동으로 만들어줌. -->
-	<bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig">	
-	<!-- DBCP(Data Base Connection pool) 컨테이너 개념 [IOC, AOP, DI]중요한 개념 가장 시간이 많이 걸리는 작업이 connetction인데 이 시간을 단축하기 위함.-->
-		<property name="driverClassName" value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy" />
-		<property name="jdbcUrl" value="jdbc:log4jdbc:oracle:thin:@127.0.0.1:1521:xe" />
+	<!-- <bean id="hikariConfig" class="com.zaxxer.hikari.HikariConfig"> -->
+		<!-- DBCP(Data Base Connection pool) 컨테이너 개념 [IOC, AOP, DI]중요한 개념 가장 시간이 
+			많이 걸리는 작업이 connetction인데 이 시간을 단축하기 위함. -->
+		<!-- <property name="driverClassName"
+			value="net.sf.log4jdbc.sql.jdbcapi.DriverSpy" />
+		<property name="jdbcUrl"
+			value="jdbc:log4jdbc:oracle:thin:@127.0.0.1:1521:xe" />
 		<property name="username" value="hr" />
 		<property name="password" value="hr" />
 	</bean>
-	<bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource" destroy-method="close">
+	<bean id="dataSource" class="com.zaxxer.hikari.HikariDataSource"
+		destroy-method="close">
 		<constructor-arg ref="hikariConfig" />
-	</bean>
+	</bean> -->
+
 
 	<!-- mybatis SqlSessionFactory -->
-	<bean class="org.mybatis.spring.SqlSessionFactoryBean"> <!--  -->
+	<!-- <bean class="org.mybatis.spring.SqlSessionFactoryBean">
 		<property name="dataSource" ref="dataSource" />
-		<property name="configLocation" value="classpath:mybatis-config.xml" />
+		<property name="configLocation"
+			value="classpath:mybatis-config.xml" />
+	</bean> -->
+
+	<!-- Transaction Manager 설정 -->
+	<!-- <bean id="transactionManager"
+		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">
+		<property name="dataSource" ref="dataSource" />
 	</bean>
 	
-	<mybatis-spring:scan base-package="com.yedam.app.**.mapper"/> <!-- mapper 하위패키지만// 관습이 있어서   -->
+	<tx:annotation-driven/> 
+	
+	<mybatis-spring:scan
+		base-package="com.yedam.app.**.mapper" /> --> <!-- mapper 하위패키지만// 관습이 있어서 -->
 	<!-- mapper만들어 주는 공간 다른 규칙으로 만들고 싶다면 이부분을 수정해서 원하는데로 작성하자. -->
 	<!-- 패키지 관습 - 루트 만들기 -> 기능별로 하위패키지를 만든다 -->
 	<!-- 인터페이스를 가지고 구현 클래스를 만든다 -->
-	
+
 </beans>

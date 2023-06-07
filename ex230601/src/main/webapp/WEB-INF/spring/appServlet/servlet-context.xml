@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<beans:beans xmlns="http://www.springframework.org/schema/mvc"
+<beans:beans
+	xmlns="http://www.springframework.org/schema/mvc"
 	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
 	xmlns:beans="http://www.springframework.org/schema/beans"
 	xmlns:context="http://www.springframework.org/schema/context"
@@ -7,22 +8,48 @@
 		http://www.springframework.org/schema/beans https://www.springframework.org/schema/beans/spring-beans.xsd
 		http://www.springframework.org/schema/context https://www.springframework.org/schema/context/spring-context.xsd">
 
-	<!-- DispatcherServlet Context: defines this servlet's request-processing infrastructure -->
-	
+	<!-- DispatcherServlet Context: defines this servlet's request-processing 
+		infrastructure -->
+
 	<!-- Enables the Spring MVC @Controller programming model -->
 	<annotation-driven />
 
-	<!-- Handles HTTP GET requests for /resources/** by efficiently serving up static resources in the ${webappRoot}/resources directory -->
+	<!-- Handles HTTP GET requests for /resources/** by efficiently serving 
+		up static resources in the ${webappRoot}/resources directory -->
 	<resources mapping="/resources/**" location="/resources/" /> <!-- webapp 아래의 resources를 의미함. -->
 
-	<!-- Resolves views selected for rendering by @Controllers to .jsp resources in the /WEB-INF/views directory -->
-	<beans:bean class="org.springframework.web.servlet.view.InternalResourceViewResolver">
-		<beans:property name="prefix" value="/WEB-INF/views/" /> 
+	<!-- Resolves views selected for rendering by @Controllers to .jsp resources 
+		in the /WEB-INF/views directory -->
+	<beans:bean
+		class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<beans:property name="prefix" value="/WEB-INF/views/" />
 		<beans:property name="suffix" value=".jsp" />
-	</beans:bean> <!-- 경로와 .jsp합쳐서 나타냄. -->
-	
-	<context:component-scan base-package="com.yedam.app" />  <!-- 다른 bean등록. -->
-	
-	
-	
+		<beans:property name="order" value="2" />
+	</beans:bean> <!-- 경로와 .jsp합쳐서 나타냄. JSP만 관리하는건 아님. -->
+
+	<beans:bean id="tilesConfigurer"
+		class="org.springframework.web.servlet.view.tiles3.TilesConfigurer">
+		<beans:property name="definitions">
+			<beans:list>
+				<beans:value>/WEB-INF/tiles.xml</beans:value>
+			</beans:list>
+		</beans:property>
+	</beans:bean>
+
+	<beans:bean id="tilesViewResolver" class="org.springframework.web.servlet.view.tiles3.TilesViewResolver">
+		<beans:property name="order" value="1" /> 	
+		<!-- viewresolver가 여러개일 경우 우선순위를 정해줘야 한다 order 순번 value 몇번째 -->
+		<!-- 순서대로 대응하고 마지막 순번까지 대응하지 못하는경우 오류발생. -->
+	</beans:bean>
+
+
+	<context:component-scan
+		base-package="com.yedam.app">
+		<!-- <context:exclude-filter type="regex" expression=".*aop.*"/> -->
+		<context:exclude-filter type="aspectj"
+			expression="com.yedam.app.aop.*" />
+	</context:component-scan>  <!-- 다른 bean등록. -->
+
+
+
 </beans:beans>
