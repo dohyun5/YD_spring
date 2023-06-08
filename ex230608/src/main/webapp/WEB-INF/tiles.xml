@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE tiles-definitions PUBLIC
+       "-//Apache Software Foundation//DTD Tiles Configuration 3.0//EN"
+       "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
+<tiles-definitions>
+	<definition name="mainTemplate" template="/WEB-INF/views/tiles/layout.jsp">
+	<!-- 이름은 유니크한이름 사용하길 권장. -->
+		<put-attribute name="header" value="/WEB-INF/views/tiles/header.jsp"/>
+		<put-attribute name="footer" value="/WEB-INF/views/tiles/footer.jsp"/>
+	</definition>
+	
+	<definition name="*/*" extends="mainTemplate"> <!-- extends값은 위에 정의되어 있어야함. -->
+		<put-attribute name="content" value="/WEB-INF/views/{1}/{2}.jsp"></put-attribute>
+	</definition>
+	
+	<!-- ex) <definition name="emp/*" extends="mainTemplate"> extends값은 위에 정의되어 있어야함.
+		<put-attribute name="content" value="/WEB-INF/views/{1}/{2}.jsp"></put-attribute>
+	</definition>  위에서 모든걸 와일드 카드로 가져오기때문에 여기에 뿌려줄게 없음.-->
+	
+	<definition name="home" extends="mainTemplate"> <!-- extends값은 위에 정의되어 있어야함. -->
+		<put-attribute name="content" value="/WEB-INF/views/home.jsp"></put-attribute>
+	</definition>
+	
+</tiles-definitions>
