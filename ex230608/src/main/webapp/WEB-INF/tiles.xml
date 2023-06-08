@@ -4,7 +4,7 @@
        "http://tiles.apache.org/dtds/tiles-config_3_0.dtd">
 <tiles-definitions>
 	<definition name="mainTemplate" template="/WEB-INF/views/tiles/layout.jsp">
-	<!-- 이름은 유니크한이름 사용하길 권장. -->
+	<!-- name은 유니크한이름 사용하길 권장. -->
 		<put-attribute name="header" value="/WEB-INF/views/tiles/header.jsp"/>
 		<put-attribute name="footer" value="/WEB-INF/views/tiles/footer.jsp"/>
 	</definition>
