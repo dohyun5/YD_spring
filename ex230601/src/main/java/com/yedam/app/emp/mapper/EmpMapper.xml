@@ -18,7 +18,7 @@
 		</where>
 	</sql>
 
-	<insert id="insertMember"
+	<insert id="insertEmp"
 		parameterType="com.yedam.app.emp.service.EmpVO">
 		<selectKey keyProperty="employeeId" resultType="string" order="BEFORE">
 			<!--  employees_seq.nextval -->
