@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+  PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+  "https://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.yedam.java.book.mapper.BookMapper">
+	
+	<select id="bookList" resultType="BookVO">
+		SELECT book_no, book_name, book_coverimg, book_date, book_price, book_publisher, book_info
+		FROM BOOK_TBL_06 ORDER BY book_no
+	</select>
+	
+	<insert id="insertBook" >
+		INSERT INTO BOOK_TBL_06 (BOOK_NO, BOOK_NAME, BOOK_COVERIMG, BOOK_DATE, BOOK_PRICE, BOOK_PUBLISHER, BOOK_INFO)
+VALUES (#{bookNo}, #{bookName}, #{bookCoverimg},#{bookDate},#{bookPrice},#{bookPublisher},#{bookInfo})
+	</insert>
+	
+	 <select id="no" resultType="String">
+	 	select MAX(book_no)+1
+	 	from book_tbl_06
+	 </select>
+	
+</mapper>

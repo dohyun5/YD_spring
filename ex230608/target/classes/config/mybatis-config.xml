@@ -10,6 +10,20 @@
 	</settings>
 	<typeAliases>
 		<package name="com.yedam.app"/>
-		
 	</typeAliases>
+	<typeHandlers>
+		<typeHandler handler="org.apache.ibatis.type.DateTypeHandler" javaType="java.sql.Date"/>
+	</typeHandlers>
+
+
+	
 </configuration>
+
+
+
+
+
+
+
+
+
