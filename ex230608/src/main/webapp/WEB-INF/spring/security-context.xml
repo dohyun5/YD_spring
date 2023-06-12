@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:security="http://www.springframework.org/schema/security"
+	xsi:schemaLocation="http://www.springframework.org/schema/security http://www.springframework.org/schema/security/spring-security-5.2.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd">
+
+	<security:http pattern="/css/**" security="none" /> <!-- 경로의 패턴을 기반으로 해서 체크함. -->
+	
+	<security:http> <!-- 패턴을 기반으로 순차적으로 진행함. intercept-url 순서 중요함  -->
+		<security:intercept-url pattern="/top.jsp" access="permitAll()" /> <!-- permitAll 모두 접근 가능 (인증)--> 
+		<security:intercept-url pattern="/admin/**" access="hasAuthority('ROLE_ADMIN')" /> <!-- Role_admin(인가)  -->
+		<security:intercept-url pattern="/**" access="isAuthenticated()" /> <!-- 인가 상관없이 인증만 되면 통과 -->
+		<security:form-login default-target-url="/top.jsp" /> <!-- 로그인시 이동 페이지  -->
+		<security:logout logout-url="/logout" logout-success-url="/top.jsp" /> <!-- 루그아웃시 이동 페이지 -->
+		<security:csrf disabled="true" />
+	</security:http>
+	
+	<security:authentication-manager> 
+		<security:authentication-provider> <!-- 내장된 provider를 통해  -->
+			<security:user-service>
+				<security:user name="user" password="{noop}1234" authorities="ROLE_USER" /> <!-- {noop} <- 암호화 되지 않았다는 의미. -->
+				<security:user name="admin" password="{noop}1234"	authorities="ROLE_ADMIN" /> <!-- 관습적으로 ROLE로 구분 -->
+			</security:user-service>
+		</security:authentication-provider>
+	</security:authentication-manager>
+
+</beans>
