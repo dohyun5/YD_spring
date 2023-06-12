@@ -8,4 +8,6 @@ public interface BookService {
 	public int getBookNo();
 	
 	public int insertBookInfo(BookVO bookVO);
+	
+	public List<RentVO> getBookRent();
 }

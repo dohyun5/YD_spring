@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import com.yedam.java.book.mapper.BookMapper;
 import com.yedam.java.book.service.BookService;
 import com.yedam.java.book.service.BookVO;
+import com.yedam.java.book.service.RentVO;
 
 @Service
 public class BookServiceImpl implements BookService {
@@ -28,6 +29,11 @@ public class BookServiceImpl implements BookService {
 	@Override
 	public int insertBookInfo(BookVO bookVO) {
 		return bookMapper.insertBookInfo(bookVO);
+	}
+
+	@Override
+	public List<RentVO> getBookRent() {
+		return bookMapper.selectBookRent();
 	}
 
 }

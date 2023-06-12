@@ -10,6 +10,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.yedam.java.book.service.BookService;
 import com.yedam.java.book.service.BookVO;
+import com.yedam.java.book.service.RentVO;
 
 @Controller
 public class BookController {
@@ -40,7 +41,14 @@ public class BookController {
 	//대여현황 페이지
 	@GetMapping("rentList")
 	public String rentList(Model model) {
-		
-		return "book/bookList";
+		List<RentVO> list = bookService.getBookRent();
+		model.addAttribute("rentList",list);
+		return "book/rentList";
 	}
+	
+	
+	
+	
+	
+	
 }

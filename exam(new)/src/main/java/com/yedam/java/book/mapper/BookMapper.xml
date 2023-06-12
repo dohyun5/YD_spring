@@ -62,5 +62,15 @@
 					)	
 	</insert>
 	
+	<select id="selectBookRent" resultType="RentVO"> <!-- 별칭 지어주는것이 오류를 안나게 함 -->
+		select b.book_no, 
+		       b.book_name, 
+		       sum(NVL(r.rent_price,0)) as rent_total_price, 
+		       count(r.rent_status) as rent_count 
+		from book_tbl_06 b left outer join rent_tbl_06 r
+  		  on b.book_no = r.book_no
+	   group by b.book_no, b.book_name
+	   order by b.book_no
+	</select>
 	
 </mapper>

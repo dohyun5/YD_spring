@@ -31,7 +31,7 @@
 					<td>${book.bookName}</td>
 					<td><img style="width:100px;" src="<c:url value='/resources/images/${book.bookCoverimg}'/>"></td>
 					<td><fmt:formatDate value="${book.bookDate}" pattern="yyyy/MM/dd"/></td>
-					<td><fmt:formatNumber value="${book.bookPrice}" type="number" maxFractionDigits="3"/></td> <!-- pattern="#,###" -->
+					<td><fmt:formatNumber value="${book.bookPrice}" type="number" maxFractionDigits="3"/></td>
 					<td>${book.bookPublisher}</td>
 					<td>${book.bookInfo}</td>
 				</tr>
