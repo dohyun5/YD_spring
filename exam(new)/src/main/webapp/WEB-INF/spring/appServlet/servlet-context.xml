@@ -45,6 +45,4 @@
 	<context:component-scan
 		base-package="com.yedam.java" />
 
-
-
 </beans:beans>

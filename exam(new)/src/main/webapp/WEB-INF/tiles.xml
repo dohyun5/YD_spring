@@ -5,7 +5,7 @@
 <tiles-definitions>
 
 	<definition name="mainTemplate" template="/WEB-INF/views/tiles/layout.jsp">
-	    <put-attribute name="title" value="app"></put-attribute>
+	    <put-attribute name="title" value="app"></put-attribute>	<!-- title은 반드시 페이지는 아님 경우에 따라서 그냥 text값을 가져오기만 하기도 함. -->
 		<put-attribute name="header" value="/WEB-INF/views/tiles/header.jsp" />
 		<put-attribute name="content" value="/WEB-INF/views/tiles/content.jsp" />
 	</definition>
