@@ -157,7 +157,7 @@
 			<groupId>org.springframework.security</groupId>
 			<artifactId>spring-security-taglibs</artifactId>
 			<version>${org.springframework.security-version}</version>
-		</dependency>
+		</dependency> <!-- 태그로 지원되는 라이브러리부분. -->
 
 		<!-- Database 연결 -->
 		<!-- Database connection pool -->

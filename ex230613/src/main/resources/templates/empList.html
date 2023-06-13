@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="https://www.thymeleaf.org">
+<!-- taglib와 비슷화다고 생각하면 된다 th를 사용하면 경로를 참조하여 사용 -->
+<head>
+<meta charset="UTF-8">
+
+<title>전체 사원 조회</title>
+</head>
+<body>
+
+	<div>
+		<button type="button" th:onclick="|location.href='@{/empInsert}'|" th:text='등록'></button>
+		<table>
+			<thead>
+				<tr>
+					<th>EMPLOYEE_ID</th>
+					<th>FIRST_NAME</th>
+					<th>JOB_ID</th>
+					<th>HIRE_DATE</th>
+				</tr>
+			</thead>
+			<tbody>
+				<th:block th:each="empInfo, stat : ${empList}" th:id=${stat.index}> <!-- 반복할 내용을 block태그를 감싸고 필요한 만큼 반복하는것을 권장. -->
+				<!-- 상태변수(여기서는 stat) -> 몇번째 데이터인지 알고 싶다면 중간에 임의의 변수를 작성해서 뽑아내면 나옴. -->
+					<tr th:id=${stat.index} th:onclick="|location.href='@{/empInfo(employeeId=${empInfo.employeeId})}'|"> <!-- 경로안에 key=value,key=value 의 반복 -->
+						<td th:text="${empInfo.employeeId}"/>
+						<td th:text="${empInfo.firstName}" />
+						<td>[[${empInfo.jobId}]]</td>
+						<td>[[${#dates.format(empInfo.hireDate,'yyyy년MM월dd일')}]]</td>
+					</tr>
+				</th:block>
+			</tbody>
+		</table>
+	</div>
+
+	<!-- <div th:each="emp : ${empList}"> foreach와 같음
+		<p th:text="${emp.lastName}"> text로 입력
+	</div> -->
+
+</body>
+</html>
