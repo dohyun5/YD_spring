@@ -31,12 +31,13 @@ public class EmpController {
 
 	//등록 페이지
 	@GetMapping("empInsert")
-	public void empInsertForm() {
+	public void empInsertForm(Model model) {
+		model.addAttribute("empVO", new EmpVO());
 	}
-
+	
 	//등록 기능
-	@PostMapping("empInsert")
-	public String empInsert(EmpVO empVO) {
+	@PostMapping("empInsert") //넘겨주는 empVO(등록페이지)와 받는 empVO(기능부분)와 object의 ${empVO}는 이름이 같아야함.
+	public String empInsert(EmpVO empVO) { 
 		empService.insertEmpInfo(empVO);
 		return "redirect:empList";
 	}

@@ -3,8 +3,12 @@
 <!-- taglib와 비슷화다고 생각하면 된다 th를 사용하면 경로를 참조하여 사용 -->
 <head>
 <meta charset="UTF-8">
-
 <title>전체 사원 조회</title>
+<script th:inline="javascript">
+	function getCtx(){
+		return /*[[${#httpServletRequest.getContextPath()}]]*/'';
+	}
+</script>
 </head>
 <body>
 
