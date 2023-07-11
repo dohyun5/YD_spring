@@ -25,9 +25,13 @@ public class BoardController {
 	// 전체조회 : URI - boardList, RETURN - board/boardList
 	@GetMapping("boardList")
 	public String boardList(Model model) {
+<<<<<<< HEAD
+		model.addAttribute("boardList", boardService.getBoardList());
+=======
 		List<BoardVO> list = boardService.getBoardList();
 		model.addAttribute("boardList", list);
 		//model.addAttribute("boardList", boardService.getBoardList());
+>>>>>>> branch 'main' of https://github.com/dohyun5/YD_spring.git
 		return "board/boardList";
 	}
 	
