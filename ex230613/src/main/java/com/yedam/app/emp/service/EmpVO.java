@@ -1,5 +1,6 @@
 package com.yedam.app.emp.service;
 
+import java.math.BigDecimal;
 import java.util.Date;
 
 import org.springframework.format.annotation.DateTimeFormat;
@@ -15,6 +16,7 @@ public class EmpVO {
 	@DateTimeFormat(pattern="yyyy-MM-dd")
 	private Date hireDate;
 	private String jobId;
+	private BigDecimal salary; //bigDecimal -> long 값을 넘어서는 범위 표시
 	private int departmentId;
 	
 	

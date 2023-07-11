@@ -19,7 +19,7 @@ public class EmpController {
 	@GetMapping("empList")
 	public String empList(Model model) {
 		model.addAttribute("empList",empService.getEmpList());
-		return "empList";
+		return "emp/empList";
 	}
 
 	//단건조회 페이지
