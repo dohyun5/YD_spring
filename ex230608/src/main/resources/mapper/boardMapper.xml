@@ -8,20 +8,20 @@
 	</sql>
 	<!-- 전체조회 -->
 	<select id="selectBoardList" resultType="BoardVO">
-		SELECT BNO, TITLE, CONTENTS, REGDATE, UPDATEDATE, IMAGE
+		SELECT BNO, TITLE,writer, CONTENTS, REGDATE, UPDATEDATE, IMAGE
 		FROM BOARD
 		ORDER BY BNO
 	</select>
 	<!-- 단건조회 : 조건 1) 글번호 2)작가 -->
 	<select id="selectBoardInfo" parameterType="int" resultType="BoardVO">
-		SELECT BNO, title, contents, REGDATEM UPDATEDATE, IMAGE
+		SELECT BNO, title,writer, contents, REGDATE, UPDATEDATE, IMAGE
 		FROM BOARD
 		<where>
 			<if test="writer != null and !writer.equalse('')">
 				<!-- wirer like '%${writer}%' -->
 				writer = #{writer} AND
 			</if>
-			bno = {bno}
+			bno = #{bno}
 		</where>
 	</select>
 	<!-- 등록 : 필수와 옵션 -->
