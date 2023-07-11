@@ -25,7 +25,7 @@ public class BoardController {
 	
 	// 전체조회 : URI - boardList, RETURN - board/boardList
 	@GetMapping("boardList")
-	public String boardList(Model model, BoardVO boardVO) {
+	public String boardList(Model model) {
 		model.addAttribute("boardList", boardService.getBoardList());
 		return "board/boardList";
 	}
